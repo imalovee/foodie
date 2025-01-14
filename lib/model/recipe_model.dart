@@ -46,6 +46,7 @@ class Recipe{
    int reviewCount;
    List<String> mealType;
    String videoUrl;
+   bool isBookmarked;
 
   Recipe({
     required this.id,
@@ -63,7 +64,8 @@ class Recipe{
     required this.reviewCount,
     required this.tags,
     required this.userId,
-    required this.videoUrl
+    required this.videoUrl,
+    this.isBookmarked = false
 });
 
 

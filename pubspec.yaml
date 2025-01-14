@@ -38,6 +38,9 @@ dependencies:
   get: ^4.6.6
   http: ^1.2.2
   youtube_player_flutter: ^9.1.1
+  firebase_auth: ^5.3.2
+  firebase_core: ^3.7.0
+  google_sign_in: ^6.2.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

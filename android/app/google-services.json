@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "890369358191",
+    "project_id": "recipe-accdc",
+    "storage_bucket": "recipe-accdc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890369358191:android:20c57ec4c8a61d7306d09a",
+        "android_client_info": {
+          "package_name": "com.aimah.recipe_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwlrnbb0HRq3upEdxSco21ApPjsqhIDK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

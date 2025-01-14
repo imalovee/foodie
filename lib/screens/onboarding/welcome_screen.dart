@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/screens/International_cuisine_screens/recipe_screen.dart';
+import 'package:recipe_app/screens/bottom_nav_screens/homeView_screen.dart';
 import 'package:recipe_app/screens/home_screen.dart';
+import 'package:recipe_app/screens/local_cuisine_screens/local_recipe_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -33,9 +36,8 @@ class WelcomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  const HomeScreen(),
-                        ),
-                      );
+                          builder: (context) =>  const HomeScreen()
+                        ));
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(MediaQuery.of(context).size.width*0.9, 49),

@@ -35,11 +35,30 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   //for back button
                   Padding(
                       padding: MediaQuery.of(context).padding,
-                    child: GestureDetector(
-                      onTap: (){
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(Icons.arrow_back),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                            style: const ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll(Colors.white)
+                            ),
+                            icon: const Icon(Icons.arrow_back, color: Colors.black,)),
+                        IconButton(onPressed: (){
+                          setState(() {
+                            widget.recipe.isBookmarked = !widget.recipe.isBookmarked;
+                          });
+                        },
+                            style: const ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll(Colors.white)
+                            ),
+                            icon: Icon(
+                                widget.recipe.isBookmarked? Icons.bookmark_added
+                            : Icons.bookmark,
+                            color: widget.recipe.isBookmarked? Colors.red: Colors.grey ,))
+                      ],
                     ),
                   ),
                   Positioned(

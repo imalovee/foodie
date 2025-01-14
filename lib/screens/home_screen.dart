@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:recipe_app/screens/details_screen.dart';
-import 'package:recipe_app/services/recipe_service.dart';
-
-import '../model/recipe_model.dart';
+import 'package:recipe_app/screens/bottom_nav_screens/bookmarks_screen.dart';
+import 'package:recipe_app/screens/bottom_nav_screens/homeView_screen.dart';
+import 'package:recipe_app/screens/bottom_nav_screens/recipeView_screen.dart';
+import 'package:recipe_app/screens/bottom_nav_screens/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,123 +12,49 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final controller = Get.put(ServiceController());
+  int selectedIndex = 0;
+  var screens = [
+     const HomeviewScreen(),
+     const RecipeviewScreen(),
+     const BookmarksScreen(),
+     const SettingsScreen(),
+  ];
   @override
   Widget build(BuildContext context) {
-    return Obx((){
-      final screenState = controller.isLoading.value;
-      final recipes = controller.recipesWithVideos;
-      return Scaffold(
-        backgroundColor: Colors.grey.shade300,
-        appBar: AppBar(
-          title: const Text('Recipes', style: TextStyle(fontWeight: FontWeight.bold,
-         ),),
-          centerTitle: true,
-        ),
-        body: screenState? const Center(
-          child: CircularProgressIndicator(color: Colors.blueAccent,),
-        ) :
-        ListView.builder(
-            itemCount: recipes.length ,
-            itemBuilder: (context, index){
-              final recipe = recipes[index];
-              return  Padding(
-                padding: const EdgeInsets.all(16),
-                child: GestureDetector(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>  DetailsScreen(recipe: recipe,),
-                      ),
-                    );
-                  },
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: 250,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          image:  DecorationImage(
-                            image: NetworkImage(recipe.image),
-                            fit: BoxFit.fill,
-                          ),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(-5, 7),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                          bottom: 0,
-                          right: 0,
-                          left: 0,
-                          child: Container(
-                            height: 45,
-                            decoration: const BoxDecoration(
-                              color: Colors.black26,
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(30),
-                              ),
-                            ),
-                            child:   Row(
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      recipe.name,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const Icon(Icons.star,color: Colors.orange,
-                                ),
-                                Text(
-                                  recipe.rating.toString(),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Text(
-                                  recipe.cookTimeMinutes.toString(),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const Text(
-                                  " min",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                              ],
-                            ),
-                          )
-                      )
-                    ],
-                  ),
-                ),
-              );
-            }
-        ),
-      );
-    }
+    return  Scaffold(
+      body: IndexedStack(
+        index: selectedIndex,
+        children: screens,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (int index){
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+        currentIndex: selectedIndex,
+          selectedItemColor: Colors.green,
+          unselectedItemColor: Colors.black,
+          showUnselectedLabels: true,
+          //selectedLabelStyle: const TextStyle(color: Colors.green),
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home, ),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.fastfood_sharp, ),
+              label: 'Recipes',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.bookmarks, ),
+              label: 'Bookmarks',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings, ),
+              label: 'Settings',
+            )
+          ]),
     );
   }
 }
